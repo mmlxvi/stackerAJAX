@@ -118,32 +118,32 @@ var getUnanswered = function(tags) {
 
 // this function takes the question object returned by StackOverflow 
 // and creates new result to be appended to DOM
-var showQuestion = function(question) {
+var showAnswerers = function(answerer) {
 	
 	// clone our result template code
-	var result = $('.templates .question').clone();
+	var result = $('.templates .answerers').clone();
 	
-	// Set the question properties in result
-	var questionElem = result.find('.question-text a');
-	questionElem.attr('href', question.link);
-	questionElem.text(question.title);
+	// Set the userID properties in result
+	var userIDElem = result.find('.userID a');
+	userIDElem.attr('href', userID.link);
+	userIDElem.text(userID.title);
 
-	// set the date asked property in result
-	var asked = result.find('.asked-date');
-	var date = new Date(1000*question.creation_date);
-	asked.text(date.toString());
+	// set the reputation property in result
+	var reputation= result.find('.reputation');
+	/* not sure what to do here: var date = new Date(1000*question.creation_date);
+	asked.text(date.toString()); */
 
-	// set the #views for question property in result
-	var viewed = result.find('.viewed');
-	viewed.text(question.view_count);
+	// set the post count for answerer property in result
+	var postCount = result.find('.postCount');
+	postCount.text(answerer.postCount);
 
-	// set some properties related to asker
-	var asker = result.find('.asker');
-	asker.html('<p>Name: <a target="_blank" href=http://stackoverflow.com/users/' + question.owner.user_id + ' >' +
+	// show score of answerer
+	var score = result.find('.score');
+	score.html( /* don't know what to put here: <p>Name: <a target="_blank" href=http://stackoverflow.com/users/' + question.owner.user_id + ' >' +
 													question.owner.display_name +
 												'</a>' +
 							'</p>' +
- 							'<p>Reputation: ' + question.owner.reputation + '</p>'
+ 							'<p>Reputation: ' + question.owner.reputation + '</p>' */
 	);
 
 	return result;
