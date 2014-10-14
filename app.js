@@ -4,8 +4,18 @@ $(document).ready( function() {
 		$('.results').html('');
 		// get the value of the tags the user submitted
 		var tags = $(this).find("input[name='tags']").val();
+
+		// ***** why is tag in parenths in line 8?
 		getUnanswered(tags);
 	});
+
+	$('.inspiration-getter').submit(function(event){
+		//zero out results if previous search has run
+		$('.results').html('');
+		// geet the value of the tags the user submitted
+		var tags = $(this).find("input[name='answerers']").val();
+		getInspiration(tag);
+	})
 });
 
 // this function takes the question object returned by StackOverflow 
@@ -40,6 +50,35 @@ var showQuestion = function(question) {
 
 	return result;
 };
+
+//duplicate and modify above (var showQuestion) for showing answerer info
+
+var showAnswerer = function(answerer) {
+	
+	// clone our result template code
+	var result = $('.templates .answerer').clone();
+	
+
+	// in var below, are the .profile_image, .post_count set by API?
+	var answererAvatar = result.find('.avatar img');
+	answererAvatar.attr('src'), answerer.user.profile_image);
+
+	var answererReputation = result.find('.reputation');
+	answererReputation.text(answerer.user.reputation);
+
+	var answererAccept = result.find('.acceptRate');
+	answererAccept.text(answerer.user.accept_rate);
+
+	var postCount = result.find('.postCount');
+	postCount.text(answerer.post_count);
+
+	var score = result.find('.score');
+	score.text(answerer.score);
+
+
+	return result;
+};
+
 
 
 // this function takes the results object from StackOverflow
@@ -87,6 +126,42 @@ var getUnanswered = function(tags) {
 		$('.search-results').append(errorElem);
 	});
 };
+
+// ****** why is tag in parenths in line 131?
+var getAnswerers = function(tag) {
+	var result = $.ajax({
+		//******  where did other student find this? line 134; how did other student know to use "url, dataType, and type",
+		//  but not 'data', as in var getUnanswered ?
+		url: "http://api.stackexchange.com/2.2/tags/"+tag+"/top-answerers/all_time?site=stackoverflow",
+		dataType: "jsonp",
+		type: "GET"
+		// **** all CAPS necessary in line 137?
+		})
+
+// ***** can we talk through .done and .fail?
+
+	.done(function(result){
+		var searchResults = showSearchResults(tag, result.items.length);
+
+		$('.search-results').html(searchResults);
+
+		$.each(result.items, function(i, item) {
+			var answerer = showAnswerer(item);
+			$('.results').append(answerer);
+		});
+	})
+
+	.fail(function(jqKHR, error, errorThrown){
+		var errorElem = showError(error);
+		$('.search-results').append(errorElem);
+	});
+	
+};
+
+
+
+
+
 
 
 
