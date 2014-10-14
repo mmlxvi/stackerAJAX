@@ -61,7 +61,7 @@ var showAnswerer = function(answerer) {
 
 	// in var below, are the .profile_image, .post_count set by API?
 	var answererAvatar = result.find('.avatar img');
-	answererAvatar.attr('src'), answerer.user.profile_image);
+	answererAvatar.attr('src', answerer.user.profile_image);
 
 	var answererReputation = result.find('.reputation');
 	answererReputation.text(answerer.user.reputation);
