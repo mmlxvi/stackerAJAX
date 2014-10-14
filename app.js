@@ -5,8 +5,7 @@ $(document).ready( function() {
 		// get the value of the tags the user submitted
 		var tags = $(this).find("input[name='tags']").val();
 
-		// ***** why is tag in parenths in line 8?
-		getUnanswered(tags);
+		// ***** how do you knwo what to put in parenth in getUnanswered(tags); and getInspiration(tag); ?
 	});
 
 	$('.inspiration-getter').submit(function(event){
@@ -17,6 +16,8 @@ $(document).ready( function() {
 		getInspiration(tag);
 	})
 });
+
+
 
 // this function takes the question object returned by StackOverflow 
 // and creates new result to be appended to DOM
