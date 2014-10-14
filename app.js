@@ -4,7 +4,7 @@ $(document).ready( function() {
 		$('.results').html('');
 		// get the value of the tags the user submitted
 		var tags = $(this).find("input[name='tags']").val();
-
+		getUnanswered(tags);
 		// ***** how do you knwo what to put in parenth in getUnanswered(tags); and getInspiration(tag); ?
 	});
 
