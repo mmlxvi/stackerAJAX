@@ -12,7 +12,7 @@ $(document).ready( function() {
 		//zero out results if previous search has run
 		$('.results').html('');
 		// geet the value of the tags the user submitted
-		var tags = $(this).find("input[name='answerers']").val();
+		var tags = $(this).find("input[name='tag']").val();
 		getInspiration(tag);
 	})
 });
