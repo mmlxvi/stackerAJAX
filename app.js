@@ -129,7 +129,7 @@ var getUnanswered = function(tags) {
 };
 
 // ****** why is tag in parenths in line 131?
-var getAnswerers = function(tag) {
+var getInspiration = function(tag) {
 	var result = $.ajax({
 		//******  where did other student find this? line 134; how did other student know to use "url, dataType, and type",
 		//  but not 'data', as in var getUnanswered ?
